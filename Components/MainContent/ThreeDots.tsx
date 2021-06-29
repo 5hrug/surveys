@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ThreeDots() {
+interface Props {
+   onClick?: () => void;
+}
+
+function ThreeDots({onClick}:Props) {
    return (
-      <Wrapper>
+      <Wrapper onClick={onClick} >
          <Dot />
          <Dot />
          <Dot />

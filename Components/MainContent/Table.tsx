@@ -1,28 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TableItem from './TableItem';
 import styled from 'styled-components';
-import TableHeader from './TableHeader'
+import TableHeader from './TableHeader';
 
-interface Props {
-   title: string;
-   state: 'Odesíla se' | 'Zpracovaná';
-   viewed: number;
-   answered: number;
-   folder: 'Unikátní' | 'Providelne';
-   created: Date;
-   validUntil: Date;
-   styledImage: any;
-}
-// created={date} validUntil={date}
 function Table() {
+   const [expanded, setExpanded] = useState<string>('');
    const date = new Date();
-   console.log(date);
+   const handleThreeDots = (title: string) => {
+      if (expanded === '') setExpanded(title);
+      else if (expanded === title) setExpanded('');
+      else setExpanded(title);
+   }
+
    return (
       <Container>
          <Header>
             <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
-       </Header>
-       <TableHeader/>
+         </Header>
+         <TableHeader />
          <TableItem
             title='nazov'
             state='Odesíla se'
@@ -31,61 +26,76 @@ function Table() {
             folder='Pravidelne'
             created={date}
             validUntil={date}
+            onClickDots={() => { handleThreeDots('nazov') }}
+            expanded={expanded}
          />
          <TableItem
-            title='nazov'
+            title='nazov2'
             state='Odesíla se'
             viewed={230}
             answered={154}
             folder='Pravidelne'
             created={date}
             validUntil={date}
-         />
-         <TableItem
-            title='nazov'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-         />
-         <TableItem
-            title='nazov'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-         />
-         <TableItem
-            title='nazov'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-         />
+            onClickDots={()=>{handleThreeDots('nazov2')}}
+            expanded={expanded}
 
+         />
+         <TableItem
+            title='nazov3'
+            state='Odesíla se'
+            viewed={230}
+            answered={154}
+            folder='Pravidelne'
+            created={date}
+            validUntil={date}
+            onClickDots={()=>{handleThreeDots('nazov3')}}
+            expanded={expanded}
+
+         />
+         <TableItem
+            title='nazov4'
+            state='Odesíla se'
+            viewed={230}
+            answered={154}
+            folder='Pravidelne'
+            created={date}
+            validUntil={date}
+            onClickDots={()=>{handleThreeDots('nazov4')}}
+            expanded={expanded}
+
+         />
+         <TableItem
+            title='nazov5'
+            state='Odesíla se'
+            viewed={230}
+            answered={154}
+            folder='Pravidelne'
+            created={date}
+            validUntil={date}
+            onClickDots={()=>{handleThreeDots('nazov5')}}
+            expanded={expanded}
+
+         />
       </Container>
    );
 }
-//#222533
 
 const Container = styled.div`
    background-color: #222533;
-   margin: 0;
+   padding: 20px 40px;
    width: 100%;
    height: 100%;
+
 `;
 
 const Header = styled.div`
    display: flex;
    justify-content: space-between;
-   padding: 15px 30px 20px;
+   margin: 0 0 20px;
+   padding: 10px 0 30px 10px;
    border-bottom: 1px solid #3e2b4c;
+   width: 1030px;
 `;
 const Titel = styled.div`
    font-size: large;

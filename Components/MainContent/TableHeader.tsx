@@ -1,56 +1,65 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 function TableHeade() {
   const handleClickSort = () => {
      
    };
    return (
+      <Wrapper>
+
+      <StyledCheckbox onClick={()=>{}}></StyledCheckbox>
+
       <Container>
-         <Title
-            onClick={handleClickSort}>
-            daco
-         </Title>
-         <State>daco</State>
-         <Viewed>daco</Viewed>
-         <Answered>daco</Answered>
-         <Folder>daco</Folder>
-         <Created>daco</Created>
-         <ValidUntil>daco</ValidUntil>
-      </Container>
+         <Item onClick={()=>{}}>Title</Item>
+         <Item onClick={()=>{}}>State</Item>
+         <Item onClick={()=>{}}>Viewed</Item>
+         <Item onClick={()=>{}}>Answered</Item>
+         <Item onClick={()=>{}}>Folder</Item>
+         <Item onClick={()=>{}}>Created</Item>
+         <Item onClick={()=>{}}>Valid until</Item>
+         <Item onClick={()=>{}}>Created by</Item>
+         </Container>
+      </Wrapper>
+         
    );
 }
 const Container = styled.div`
    display: flex;
    flex-direction: row;
    background-color: #222533;
-   height: 3em;
+   height: 1em;
    align-items: center;
    justify-content: space-evenly;
    width: 1000px;
-   margin: 10px 0;
-   border: 1px dashed #3e2b4c;
    color: #5f5f64;
 `;
 
-const Title = styled.div`
-   color: #5f5f64;
+const StyledCheckbox = styled.div`
+   width: 20px;
+   height: 20px;
+   border: 1px dashed #3e2b4c;
+   border-radius: 3px;
+   margin: 0 10px 0 0;
 `;
-const State = styled.div`
-   color: #5f5f64;
+const Wrapper = styled.div`
+   display: flex;
+   align-items: center;
+   margin: 30px 0 20px;
 `;
-const Viewed = styled.div`
-   color: #5f5f64;
+
+const Icon = styled(FontAwesomeIcon)`
+  font-weight: lighter;
+  font-size: 12px;
+  /* margin-left: 3px; */
+  color: #146586;
+
 `;
-const Answered = styled.div`
+
+const Item = styled.div`
    color: #5f5f64;
+   font-size: 13px;
 `;
-const Folder = styled.div`
-   color: #5f5f64;
-`;
-const Created = styled.div`
-   color: #5f5f64;
-`;
-const ValidUntil = styled.div`
-   color: #5f5f64;
-`;
+
 export default TableHeade;

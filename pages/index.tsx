@@ -14,6 +14,7 @@ export default function Home() {
          </Head>
 
          <MainContainer>
+            {/* <TempBox>asdasd</TempBox> */}
             <Header />
             <ContainerTableSideBar>
                <SideBar />
@@ -25,13 +26,22 @@ export default function Home() {
 }
 const AppWrapper = styled.div`
    display: flex;
-   min-height:100vh; 
+   min-height: 100vh;
 `;
 const MainContainer = styled.main`
    width: 100%;
    height: 100%;
+   /* border: solid 5px #b38f8f;
+   background-color: '#c02b2b'; */
+`;
+const TempBox = styled.div`
+   width: 1000px;
+   height: 1000px;
+   border: solid 5px #3f3e3e;
+   background-color: '#c02b2b';
 `;
 
 const ContainerTableSideBar = styled.div`
    display: flex;
+   height: 100%;
 `;

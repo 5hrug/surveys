@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import ThreeDots from './ThreeDots'
+import ThreeDots from './ThreeDots';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+   faTrashAlt,
+   faEye,
+   faPlay,
+   faEdit,
+   faSignal,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
    title: string;
@@ -11,30 +19,91 @@ interface Props {
    created?: Date;
    validUntil?: Date;
    styledImage?: any;
+   onClickDots?: () => void;
+   expanded?: string;
 }
 function TableItem(props: Props) {
    return (
       <Wrapper>
-         <StyledCheckbox></StyledCheckbox>
-         <Container>
-            <Title>{props.title}</Title>
-            <State>{props.state}</State>
-            <Viewed>{props.viewed}</Viewed>
-            <Answered>{props.answered}</Answered>
-            <Folder>{props.folder}</Folder>
-            <Created>{props.created?.getDate()}</Created>
-            <ValidUntil>{props.validUntil?.getHours()}</ValidUntil>
-            <StyledImage>{props.styledImage}</StyledImage>
-       </Container>
-       <ThreeDots/>
+         <Row>
+            <StyledCheckbox onClick={() => {}}></StyledCheckbox>
+            <Container>
+               <Item>{props.title}</Item>
+               <Item>{props.state}</Item>
+               <ItemBold>{props.viewed}</ItemBold>
+               <ItemBold>{props.answered}</ItemBold>
+               <Item>{props.folder}</Item>
+               <Item>{props.created?.getDate()}</Item>
+               <Item>{props.validUntil?.getHours()}</Item>
+               <StyledImage>{props.styledImage}</StyledImage>
+            </Container>
+            <ThreeDots onClick={props.onClickDots} />
+         </Row>
+         {props.expanded === props.title && (
+            <Row>
+               <ExpandedContainer>
+                  <ExpandedItem>
+                     <Icon icon={faPlay} />
+                     Activate
+                  </ExpandedItem>
+                  <ExpandedItem>
+                     <Icon icon={faEye} />
+                     Preview
+                  </ExpandedItem>
+                  <ExpandedItem>
+                     <Icon icon={faEdit} />
+                     Edit
+                  </ExpandedItem>
+                  <ExpandedItem>
+                     <Icon icon={faSignal} />
+                     Stats
+                  </ExpandedItem>
+                  <ExpandedItem>
+                     <Icon icon={faTrashAlt} />
+                     Delete
+                  </ExpandedItem>
+               </ExpandedContainer>
+            </Row>
+         )}
       </Wrapper>
    );
 }
-
+const Icon = styled(FontAwesomeIcon)`
+   font-weight: lighter;
+   height: 12px;
+   margin-right: 5px;
+`;
 const Wrapper = styled.div`
    display: flex;
+   flex-direction: column;
+   width: max-content;
    align-items: center;
-   margin: 20px;
+   margin: 10px 0;
+`;
+
+const ExpandedContainer = styled.div`
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   background-color: #171820;
+   height: 50px;
+   align-items: center;
+   width: 950px;
+   border-radius: 5px;
+`;
+
+const ExpandedItem = styled.div`
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   color: #abadb0;
+   font-size: 12px;
+   margin: 0 10px;
+`;
+const Row = styled.div`
+   display: flex;
+   flex-direction: row;
+   align-items: center;
 `;
 const Container = styled.div`
    display: flex;
@@ -44,8 +113,9 @@ const Container = styled.div`
    align-items: center;
    justify-content: space-evenly;
    width: 1000px;
-   margin: 10px 0;
    border: 1px dashed #3e2b4c;
+   height: 70px;
+   border-radius: 5px;
 `;
 const StyledCheckbox = styled.div`
    width: 20px;
@@ -54,29 +124,14 @@ const StyledCheckbox = styled.div`
    border-radius: 3px;
    margin: 0 10px 0 0;
 `;
-
-const Title = styled.div`
-   color: #ffffff;
-`;
-const State = styled.div`
-   color: #585860;
-`;
-const Viewed = styled.div`
+const ItemBold = styled.div`
    color: #66676c;
    font-weight: bold;
+   font-size: 13px;
 `;
-const Answered = styled.div`
-   color: #66676c;
-   font-weight: bold;
-`;
-const Folder = styled.div`
-   color: #585860;
-`;
-const Created = styled.div`
-   color: #585860;
-`;
-const ValidUntil = styled.div`
-   color: #585860;
+const Item = styled.div`
+   color: #c2c2c2;
+   font-size: 13px;
 `;
 const StyledImage = styled.div``;
 
