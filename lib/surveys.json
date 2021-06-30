@@ -1,49 +1,54 @@
 {
   "data": [
     {
-      "title": "nazov",
-      "state": "Odesíla se",
-      "viewed": "230",
-      "answered": "154",
+      "id": 1,
+      "title": "a",
+      "state": "Zpracovaná",
+      "viewed": 4,
+      "answered": 95,
       "folder": "Pravidelne",
-      "created": "12. list 2017",
-      "validUntil": "1. dub 2019"
+      "created": 1478884038,
+      "validUntil": 1593187638
     },
     {
-      "title": "nazov",
+      "id": 2,
+      "title": "v",
       "state": "Odesíla se",
-      "viewed": "230",
-      "answered": "154",
-      "folder": "Pravidelne",
-      "created": "12. list 2017",
-      "validUntil": "1. dub 2019"
+      "viewed": 24,
+      "answered": 194,
+      "folder": "Unikátní",
+      "created": 1556294838,
+      "validUntil": 1505837238
     },
     {
-      "title": "nazov",
-      "state": "Odesíla se",
-      "viewed": "230",
-      "answered": "154",
+      "id": 3,
+      "title": "b",
+      "state": "Zpracovaná",
+      "viewed": 30,
+      "answered": 5,
       "folder": "Pravidelne",
-      "created": "12. list 2017",
-      "validUntil": "1. dub 2019"
+      "created": 1492963638,
+      "validUntil": 1524499638
     },
     {
-      "title": "nazov",
+      "id": 4,
+      "title": "p",
       "state": "Odesíla se",
-      "viewed": "230",
-      "answered": "154",
+      "viewed": 20,
+      "answered": 1,
       "folder": "Pravidelne",
-      "created": "12. list 2017",
-      "validUntil": "1. dub 2019"
+      "created": 1478884038,
+      "validUntil": 1587917238
     },
     {
-      "title": "nazov",
+      "id": 5,
+      "title": "h",
       "state": "Odesíla se",
-      "viewed": "230",
-      "answered": "154",
-      "folder": "Pravidelne",
-      "created": "12. list 2017",
-      "validUntil": "1. dub 2019"
+      "viewed": 235,
+      "answered": 158,
+      "folder": "Unikátní",
+      "created": 1561910838,
+      "validUntil": 1505837238
     }
   ]
 }

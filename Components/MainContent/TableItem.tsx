@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThreeDots from './ThreeDots';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 import {
    faTrashAlt,
    faEye,
@@ -20,25 +21,32 @@ interface Props {
    viewed?: number;
    answered?: number;
    folder?: folderType;
-   created?: string;
-   validUntil?: string;
+   created: number;
+   validUntil: number;
    styledImage?: any;
    onClickDots?: () => void;
-   expanded?: number;
+   expanded: number;
 }
 export function TableItem(props: Props) {
+   const handleUnix = (unixTimestamp: number) => {
+      return moment.unix(unixTimestamp).format('DD. MMM YYYY');
+   };
+
+   const ex = String(props.expanded);
+   const colorId = String(props.id);
+   console.log(ex, colorId);
    return (
       <Wrapper>
          <Row>
             <StyledCheckbox onClick={() => {}}></StyledCheckbox>
-            <Container>
+            <Container id={ex} color={colorId}>
                <Item>{props.title}</Item>
                <Item>{props.state}</Item>
                <ItemBold>{props.viewed}</ItemBold>
                <ItemBold>{props.answered}</ItemBold>
                <Item>{props.folder}</Item>
-               <Item>{props.created}</Item>
-               <Item>{props.validUntil}</Item>
+               <Item>{handleUnix(props.created)}</Item>
+               <Item>{handleUnix(props.validUntil)}</Item>
                <StyledImage>{props.styledImage}</StyledImage>
             </Container>
             <ThreeDots onClick={props.onClickDots} />
@@ -112,14 +120,17 @@ const Row = styled.div`
 const Container = styled.div`
    display: flex;
    flex-direction: row;
-   background-color: #222533;
+   background-color: ${(props) =>
+      props.color == props.id ? '#282b3b' : '#222533'};
    height: 3em;
    align-items: center;
    justify-content: space-evenly;
    width: 1000px;
-   border: 1px dashed #3e2b4c;
+   ${(props) => (props.color == props.id ? '' : 'border: 1px dashed #3e2b4c;')}
    height: 70px;
    border-radius: 5px;
+   box-shadow: ${(props) =>
+      props.color == props.id ? '0 0 5px 5px rgb(32,32,50,1)' : ''};
 `;
 const StyledCheckbox = styled.div`
    width: 20px;

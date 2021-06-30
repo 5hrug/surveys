@@ -1,30 +1,83 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-   sortOnClick: (name:string) => void;
+   sortOnClick: (name: string) => void;
+   whiteColor: string;
 }
-function TableHeader({sortOnClick}:Props) {
-
+function TableHeader({ sortOnClick, whiteColor }: Props) {
    return (
       <Wrapper>
+         <StyledCheckbox onClick={() => {}}></StyledCheckbox>
 
-      <StyledCheckbox onClick={()=>{}}></StyledCheckbox>
+         <Container>
+            <Item
+               onClick={() => {
+                  sortOnClick('title');
+               }}
+               color={whiteColor == 'title' ? whiteColor : ''}>
+               Title
+               {whiteColor == 'title' && <Icon icon={faAngleDown} />}
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('state');
+               }}
+               color={whiteColor == 'state' ? whiteColor : ''}>
+               State
+               {whiteColor == 'state' && <Icon icon={faAngleDown} />}
 
-      <Container>
-         <Item onClick={()=>{sortOnClick('title')}}>Title</Item>
-         <Item onClick={()=>{sortOnClick('state')}}>State</Item>
-         <Item onClick={()=>{sortOnClick('viewed')}}>Viewed</Item>
-         <Item onClick={()=>{sortOnClick('answered')}}>Answered</Item>
-         <Item onClick={()=>{sortOnClick('folder')}}>Folder</Item>
-         <Item onClick={()=>{sortOnClick('created')}}>Created</Item>
-         <Item onClick={()=>{sortOnClick('validUntil')}}>Valid until</Item>
-         <Item onClick={()=>{}}>Created by</Item>
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('viewed');
+               }}
+               color={whiteColor == 'viewed' ? whiteColor : ''}>
+               Viewed
+               {whiteColor == 'viewed' && <Icon icon={faAngleDown} />}
+
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('answered');
+               }}
+               color={whiteColor == 'answered' ? whiteColor : ''}>
+               Answered
+               {whiteColor == 'answered' && <Icon icon={faAngleDown} />}
+
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('folder');
+               }}
+               color={whiteColor == 'folder' ? whiteColor : ''}>
+               Folder
+               {whiteColor == 'folder' && <Icon icon={faAngleDown} />}
+
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('created');
+               }}
+               color={whiteColor == 'created' ? whiteColor : ''}>
+               Created
+               {whiteColor == 'created' && <Icon icon={faAngleDown} />}
+
+            </Item>
+            <Item
+               onClick={() => {
+                  sortOnClick('validUntil');
+               }}
+               color={whiteColor == 'validUntil' ? whiteColor : ''}>
+               Valid until
+               {whiteColor == 'validUntil' && <Icon icon={faAngleDown} />}
+
+            </Item>
+            <Item onClick={() => {}}>Created by</Item>
          </Container>
       </Wrapper>
-         
    );
 }
 const Container = styled.div`
@@ -35,7 +88,6 @@ const Container = styled.div`
    align-items: center;
    justify-content: space-evenly;
    width: 1000px;
-   color: #5f5f64;
 `;
 
 const StyledCheckbox = styled.div`
@@ -52,15 +104,17 @@ const Wrapper = styled.div`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-  font-weight: lighter;
-  font-size: 12px;
-  /* margin-left: 3px; */
-  color: #146586;
+   font-weight: lighter;
+  height: 12px;
+  margin-left: 5px;
 
+   color: #146586;
 `;
-
 const Item = styled.div`
-   color: #5f5f64;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   color: ${({ color }) => (color ? '#cfcfcf' : '#5f5f64')};
    font-size: 13px;
    cursor: pointer;
 `;

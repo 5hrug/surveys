@@ -2,21 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import TableItem, { stateType, folderType } from './TableItem';
 import styled from 'styled-components';
 import TableHeader from './TableHeader';
-import apiData from '../../lib/surveys';
+import apiData from '../../lib/surveys.json';
 
 type FieldSortType = string | number;
 
-const toggleOtherBooleans = (one: string) => {
-   sortTitle = false,
-   sortState = false,
-   sortViewed = false,
-   sortAnswered = false,
-   sortFolder = false,
-   sortCreated = false,
-   sortValidUntil = false
-}
-const pole = new Array(7).fill(false);
-console.log(pole);
+const allSortedAsc = () => {
+   (sortTitle = false),
+      (sortState = false),
+      (sortViewed = false),
+      (sortAnswered = false),
+      (sortFolder = false),
+      (sortCreated = false),
+      (sortValidUntil = false);
+};
 let sortTitle = false,
    sortState = false,
    sortViewed = false,
@@ -25,14 +23,15 @@ let sortTitle = false,
    sortCreated = false,
    sortValidUntil = false;
 
-let premenna = '';
 function Table() {
    const [expanded, setExpanded] = useState<number>(-1);
-   const date = new Date();
    const surveysData = apiData.data;
-   const [sortedSurveys, setSortedSurveys] = useState<any >(
-   );
+   const [sortedSurveys, setSortedSurveys] = useState<any>();
+   const [headerWhiteColor, setHeaderWhiteColor] = useState('');
 
+   useEffect(() => {
+      handleClickSort('answered');
+   }, []);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -40,119 +39,167 @@ function Table() {
       else setExpanded(id);
    };
 
-   const handleClickSort = (fieldToSort: FieldSortType) => {
+   const handleClickSort = ( fieldToSort: FieldSortType) => {
       switch (fieldToSort) {
-         case 'title':
-            
-            // if (sortTitle) {
-            //    console.log('if')
-            //    sortTitle = false;
-            //    const newData = surveysData.slice();
-            //    setSortedSurveys(
-            //       newData.sort((a, b) => {
-            //          return ('' + a.title).localeCompare(b.title);
-            //       })
-            //    );
-            // } else {
-            //    console.log('elseif')
-            //    sortTitle = true;
-            //    const newData = surveysData.slice();
-            //    setSortedSurveys(
-            //       newData.sort((a, b) => {
-            //          return ('' + b.title).localeCompare(a.title);
-            //       })
-            //    );
-            // }
 
-            break;
-         case 'state':
-            if (sortState) {
-               sortState = false;
-               const newData = surveysData.slice();
+         case 'title':
+            setHeaderWhiteColor('title');
+            if (sortTitle) {
+               console.log('if');
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
-                     return ('' + a.state).localeCompare(b.state);
+                  newSurveys.sort((a, b) => {
+                     return ('' + b.title).localeCompare(a.title);
                   })
                );
             } else {
-               sortState = true;
-               const newData = surveysData.slice();
+               console.log('elseif');
+               allSortedAsc();
+               sortTitle = true;
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
-                     return ('' + b.state).localeCompare(a.state);
+                  newSurveys.sort((a, b) => {
+                     return ('' + a.title).localeCompare(b.title);
                   })
                );
             }
             break;
-         case 'viewed':
-            if (sortViewed) {
-               sortViewed = false;
 
-               const newData = surveysData.slice();
+         case 'state':
+            setHeaderWhiteColor('state');
+            if (sortState) {
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
+                  newSurveys.sort((a, b) => {
+                     return ('' + b.state).localeCompare(a.state);
+                  })
+               );
+            } else {
+               allSortedAsc();
+               sortState = true;
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
+                     return ('' + a.state).localeCompare(b.state);
+                  })
+               );
+            }
+            break;
+
+         case 'viewed':
+            setHeaderWhiteColor('viewed');
+            if (sortViewed) {
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
                      return b.viewed - a.viewed;
                   })
                );
             } else {
+               allSortedAsc();
                sortViewed = true;
-
-               const newData = surveysData.slice();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
+                  newSurveys.sort((a, b) => {
                      return a.viewed - b.viewed;
                   })
                );
             }
             break;
+
          case 'answered':
+            setHeaderWhiteColor('answered');
             console.log('answered');
             if (sortAnswered) {
+               allSortedAsc();
                console.log('if answered');
-               sortAnswered = false;
-
-               const newData = surveysData.slice();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
+                  newSurveys.sort((a, b) => {
                      return b.answered - a.answered;
                   })
                );
             } else {
+               allSortedAsc();
                console.log('else answered');
                console.log('surveysData.slice() answered', surveysData.slice());
                sortAnswered = true;
-
-               const newData = surveysData.slice();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
+                  newSurveys.sort((a, b) => {
                      return a.answered - b.answered;
                   })
                );
             }
-
             break;
+
          case 'folder':
+            setHeaderWhiteColor('folder');
             if (sortFolder) {
-               sortFolder = false;
-               const newData = surveysData.slice();
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
-                     return ('' + a.folder).localeCompare(b.folder);
+                  newSurveys.sort((a, b) => {
+                     return ('' + b.folder).localeCompare(a.folder);
                   })
                );
             } else {
+               allSortedAsc();
                sortFolder = true;
-               const newData = surveysData.slice();
+               const newSurveys = surveysData.slice();
                setSortedSurveys(
-                  newData.sort((a, b) => {
-                     return ('' + b.folder).localeCompare(a.folder);
+                  newSurveys.sort((a, b) => {
+                     return ('' + a.folder).localeCompare(b.folder);
                   })
                );
             }
             break;
-         // case 'created':
-         //    break;
-         // case 'validUntil':
+
+         case 'created':
+            setHeaderWhiteColor('created');
+            if (sortCreated) {
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
+                     return b.created - a.created;
+                  })
+               );
+            } else {
+               allSortedAsc();
+               sortCreated = true;
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
+                     return a.created - b.created;
+                  })
+               );
+            }
+            break;
+         
+         case 'validUntil':
+            setHeaderWhiteColor('validUntil');
+            if (sortValidUntil) {
+               allSortedAsc();
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
+                     return b.validUntil - a.validUntil;
+                  })
+               );
+            } else {
+               allSortedAsc();
+               sortValidUntil = true;
+               const newSurveys = surveysData.slice();
+               setSortedSurveys(
+                  newSurveys.sort((a, b) => {
+                     return a.validUntil - b.validUntil;
+                  })
+               );
+            }
          default:
             console.log('default');
       }
@@ -162,7 +209,7 @@ function Table() {
          <Header>
             <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
          </Header>
-         <TableHeader sortOnClick={handleClickSort} />
+         <TableHeader sortOnClick={handleClickSort} whiteColor={headerWhiteColor}  />
          {sortedSurveys &&
             sortedSurveys.map((objInArray: any) => {
                return (
@@ -183,6 +230,7 @@ function Table() {
                   />
                );
             })}
+         
          {/* <TableItem
             title='nazov'
             state='Odesíla se'
