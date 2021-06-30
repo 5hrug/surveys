@@ -2,23 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-function TableHeade() {
-  const handleClickSort = () => {
-     
-   };
+
+interface Props {
+   sortOnClick: (name:string) => void;
+}
+function TableHeader({sortOnClick}:Props) {
+
    return (
       <Wrapper>
 
       <StyledCheckbox onClick={()=>{}}></StyledCheckbox>
 
       <Container>
-         <Item onClick={()=>{}}>Title</Item>
-         <Item onClick={()=>{}}>State</Item>
-         <Item onClick={()=>{}}>Viewed</Item>
-         <Item onClick={()=>{}}>Answered</Item>
-         <Item onClick={()=>{}}>Folder</Item>
-         <Item onClick={()=>{}}>Created</Item>
-         <Item onClick={()=>{}}>Valid until</Item>
+         <Item onClick={()=>{sortOnClick('title')}}>Title</Item>
+         <Item onClick={()=>{sortOnClick('state')}}>State</Item>
+         <Item onClick={()=>{sortOnClick('viewed')}}>Viewed</Item>
+         <Item onClick={()=>{sortOnClick('answered')}}>Answered</Item>
+         <Item onClick={()=>{sortOnClick('folder')}}>Folder</Item>
+         <Item onClick={()=>{sortOnClick('created')}}>Created</Item>
+         <Item onClick={()=>{sortOnClick('validUntil')}}>Valid until</Item>
          <Item onClick={()=>{}}>Created by</Item>
          </Container>
       </Wrapper>
@@ -60,6 +62,7 @@ const Icon = styled(FontAwesomeIcon)`
 const Item = styled.div`
    color: #5f5f64;
    font-size: 13px;
+   cursor: pointer;
 `;
 
-export default TableHeade;
+export default TableHeader;

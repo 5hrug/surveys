@@ -10,19 +10,23 @@ import {
    faSignal,
 } from '@fortawesome/free-solid-svg-icons';
 
+export type stateType = 'Odesíla se' | 'Zpracovaná';
+export type folderType = 'Unikátní' | 'Pravidelne';
+
 interface Props {
+   id: number;
    title: string;
-   state: 'Odesíla se' | 'Zpracovaná';
+   state: stateType;
    viewed?: number;
    answered?: number;
-   folder?: 'Unikátní' | 'Pravidelne';
-   created?: Date;
-   validUntil?: Date;
+   folder?: folderType;
+   created?: string;
+   validUntil?: string;
    styledImage?: any;
    onClickDots?: () => void;
-   expanded?: string;
+   expanded?: number;
 }
-function TableItem(props: Props) {
+export function TableItem(props: Props) {
    return (
       <Wrapper>
          <Row>
@@ -33,13 +37,13 @@ function TableItem(props: Props) {
                <ItemBold>{props.viewed}</ItemBold>
                <ItemBold>{props.answered}</ItemBold>
                <Item>{props.folder}</Item>
-               <Item>{props.created?.getDate()}</Item>
-               <Item>{props.validUntil?.getHours()}</Item>
+               <Item>{props.created}</Item>
+               <Item>{props.validUntil}</Item>
                <StyledImage>{props.styledImage}</StyledImage>
             </Container>
             <ThreeDots onClick={props.onClickDots} />
          </Row>
-         {props.expanded === props.title && (
+         {props.expanded === props.id && (
             <Row>
                <ExpandedContainer>
                   <ExpandedItem>
