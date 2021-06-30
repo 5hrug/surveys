@@ -2,19 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import TableItem, { stateType, folderType } from './TableItem';
 import styled from 'styled-components';
 import TableHeader from './TableHeader';
-import apiData from '../../lib/surveys';
+import apiData from '../../lib/surveys.json';
+// import ReactTable from './ReactTable';
+import App from './Another'
 
 type FieldSortType = string | number;
 
 const toggleOtherBooleans = (one: string) => {
-   sortTitle = false,
-   sortState = false,
-   sortViewed = false,
-   sortAnswered = false,
-   sortFolder = false,
-   sortCreated = false,
-   sortValidUntil = false
-}
+   (sortTitle = false),
+      (sortState = false),
+      (sortViewed = false),
+      (sortAnswered = false),
+      (sortFolder = false),
+      (sortCreated = false),
+      (sortValidUntil = false);
+};
 const pole = new Array(7).fill(false);
 console.log(pole);
 let sortTitle = false,
@@ -30,9 +32,7 @@ function Table() {
    const [expanded, setExpanded] = useState<number>(-1);
    const date = new Date();
    const surveysData = apiData.data;
-   const [sortedSurveys, setSortedSurveys] = useState<any >(
-   );
-
+   const [sortedSurveys, setSortedSurveys] = useState<any>();
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -43,7 +43,6 @@ function Table() {
    const handleClickSort = (fieldToSort: FieldSortType) => {
       switch (fieldToSort) {
          case 'title':
-            
             // if (sortTitle) {
             //    console.log('if')
             //    sortTitle = false;
@@ -163,7 +162,8 @@ function Table() {
             <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
          </Header>
          <TableHeader sortOnClick={handleClickSort} />
-         {sortedSurveys &&
+         <App />
+         {/* {sortedSurveys &&
             sortedSurveys.map((objInArray: any) => {
                return (
                   <TableItem
@@ -182,7 +182,7 @@ function Table() {
                      expanded={expanded}
                   />
                );
-            })}
+            })} */}
          {/* <TableItem
             title='nazov'
             state='Odesíla se'
