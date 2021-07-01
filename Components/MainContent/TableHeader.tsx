@@ -1,16 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
+import { faCheck, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 interface Props {
    sortOnClick: (name: string) => void;
    whiteColor: string;
+   allCheckboxes?: boolean;
+   handleClickAllCheckboxes?: () => void;
 }
-function TableHeader({ sortOnClick, whiteColor }: Props) {
+function TableHeader({
+   sortOnClick,
+   whiteColor,
+   allCheckboxes,
+   handleClickAllCheckboxes,
+}: Props) {
    return (
       <Wrapper>
-         <StyledCheckbox onClick={() => {}}></StyledCheckbox>
+         <StyledCheckbox onClick={handleClickAllCheckboxes}>
+            {allCheckboxes && <CheckIcon icon={faCheck} />}
+         </StyledCheckbox>
 
          <Container>
             <Item
@@ -28,7 +36,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'state' ? whiteColor : ''}>
                State
                {whiteColor == 'state' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item
                onClick={() => {
@@ -37,7 +44,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'viewed' ? whiteColor : ''}>
                Viewed
                {whiteColor == 'viewed' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item
                onClick={() => {
@@ -46,7 +52,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'answered' ? whiteColor : ''}>
                Answered
                {whiteColor == 'answered' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item
                onClick={() => {
@@ -55,7 +60,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'folder' ? whiteColor : ''}>
                Folder
                {whiteColor == 'folder' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item
                onClick={() => {
@@ -64,7 +68,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'created' ? whiteColor : ''}>
                Created
                {whiteColor == 'created' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item
                onClick={() => {
@@ -73,7 +76,6 @@ function TableHeader({ sortOnClick, whiteColor }: Props) {
                color={whiteColor == 'validUntil' ? whiteColor : ''}>
                Valid until
                {whiteColor == 'validUntil' && <Icon icon={faAngleDown} />}
-
             </Item>
             <Item onClick={() => {}}>Created by</Item>
          </Container>
@@ -90,12 +92,20 @@ const Container = styled.div`
    width: 1000px;
 `;
 
+const CheckIcon = styled(FontAwesomeIcon)`
+   color: white;
+   height: 12px;
+`;
+
 const StyledCheckbox = styled.div`
    width: 20px;
    height: 20px;
    border: 1px dashed #3e2b4c;
    border-radius: 3px;
    margin: 0 10px 0 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 `;
 const Wrapper = styled.div`
    display: flex;
@@ -105,8 +115,8 @@ const Wrapper = styled.div`
 
 const Icon = styled(FontAwesomeIcon)`
    font-weight: lighter;
-  height: 12px;
-  margin-left: 5px;
+   height: 12px;
+   margin-left: 5px;
 
    color: #146586;
 `;

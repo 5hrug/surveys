@@ -1,10 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableItem, { stateType, folderType } from './TableItem';
 import styled from 'styled-components';
 import TableHeader from './TableHeader';
 import apiData from '../../lib/surveys.json';
 
 type FieldSortType = string | number;
+
+let sortTitle = false,
+   sortState = false,
+   sortViewed = false,
+   sortAnswered = false,
+   sortFolder = false,
+   sortCreated = false,
+   sortValidUntil = false;
 
 const allSortedAsc = () => {
    (sortTitle = false),
@@ -15,13 +23,6 @@ const allSortedAsc = () => {
       (sortCreated = false),
       (sortValidUntil = false);
 };
-let sortTitle = false,
-   sortState = false,
-   sortViewed = false,
-   sortAnswered = false,
-   sortFolder = false,
-   sortCreated = false,
-   sortValidUntil = false;
 
 function Table() {
    const [expanded, setExpanded] = useState<number>(-1);
@@ -29,9 +30,14 @@ function Table() {
    const [sortedSurveys, setSortedSurveys] = useState<any>();
    const [headerWhiteColor, setHeaderWhiteColor] = useState('');
 
+   const [isCheck, setIsCheck] = useState<number[]>([]);
+
    useEffect(() => {
       handleClickSort('answered');
    }, []);
+   useEffect(() => {
+      console.log(isCheck);
+   }, [isCheck]);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -39,9 +45,8 @@ function Table() {
       else setExpanded(id);
    };
 
-   const handleClickSort = ( fieldToSort: FieldSortType) => {
+   const handleClickSort = (fieldToSort: FieldSortType) => {
       switch (fieldToSort) {
-
          case 'title':
             setHeaderWhiteColor('title');
             if (sortTitle) {
@@ -179,7 +184,7 @@ function Table() {
                );
             }
             break;
-         
+
          case 'validUntil':
             setHeaderWhiteColor('validUntil');
             if (sortValidUntil) {
@@ -204,17 +209,50 @@ function Table() {
             console.log('default');
       }
    };
+
+   const handleClickCheckbox = (checked: boolean, id: number) => {
+      console.log(checked, id);
+      setIsCheck([...isCheck, id]);
+      if (!checked) {
+         setIsCheck(isCheck.filter((item) => item !== id));
+      }
+   };
+   const [allCheckboxes, setAllCheckboxes] = useState(false);
+
+   const handleClickAllCheckboxes = () => {
+      console.log('smetu')
+      setAllCheckboxes(!allCheckboxes);
+      const newData = surveysData.slice();
+      setIsCheck(newData.map(li => li.id));
+      if (allCheckboxes) {
+        setIsCheck([]);
+      }
+      // console.log(checked, id);
+      // setIsCheck([...isCheck, id]);
+      // if (!checked) {
+      //    setIsCheck(isCheck.filter((item) => item !== id));
+      // }
+   };
+
+
    return (
       <Container>
          <Header>
             <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
          </Header>
-         <TableHeader sortOnClick={handleClickSort} whiteColor={headerWhiteColor}  />
+         <TableHeader
+            sortOnClick={handleClickSort}
+            whiteColor={headerWhiteColor}
+            allCheckboxes={allCheckboxes}
+            handleClickAllCheckboxes={handleClickAllCheckboxes}
+         />
          {sortedSurveys &&
             sortedSurveys.map((objInArray: any) => {
                return (
                   <TableItem
                      key={objInArray.id}
+                     handleClickCheckbox={handleClickCheckbox}
+                     isChecked={isCheck.includes(objInArray.id)}
                      id={objInArray.id}
                      title={objInArray.title}
                      state={objInArray.state as stateType}
@@ -230,7 +268,7 @@ function Table() {
                   />
                );
             })}
-         
+
          {/* <TableItem
             title='nazov'
             state='Odesíla se'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import ThreeDots from './ThreeDots';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import {
    faPlay,
    faEdit,
    faSignal,
+   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 export type stateType = 'Odesíla se' | 'Zpracovaná';
@@ -26,19 +27,31 @@ interface Props {
    styledImage?: any;
    onClickDots?: () => void;
    expanded: number;
+   handleClickCheckbox?: (checked: boolean, id: number) => void;
+   isChecked?: boolean;
 }
 export function TableItem(props: Props) {
+   const [checked, setChecked] = useState(false);
+
    const handleUnix = (unixTimestamp: number) => {
       return moment.unix(unixTimestamp).format('DD. MMM YYYY');
    };
 
    const ex = String(props.expanded);
    const colorId = String(props.id);
-   console.log(ex, colorId);
+
+   useEffect(() => {
+      props.handleClickCheckbox && props.handleClickCheckbox(checked, props.id);
+   }, [checked])
    return (
       <Wrapper>
          <Row>
-            <StyledCheckbox onClick={() => {}}></StyledCheckbox>
+            <StyledCheckbox
+               onClick={() => {
+                  setChecked((prev) => !prev);
+               }}>
+               {props.isChecked && <CheckIcon icon={faCheck} />}
+            </StyledCheckbox>
             <Container id={ex} color={colorId}>
                <Item>{props.title}</Item>
                <Item>{props.state}</Item>
@@ -80,10 +93,26 @@ export function TableItem(props: Props) {
       </Wrapper>
    );
 }
+
+// const SkuskaInput = styled('input')`
+// -webkit-appearance: none;
+// 	background-color: #b33434;
+// 	/* background-color: inherit; */
+// 	/* border: 1px solid #cacece; */
+// 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+// 	padding: 10px;
+// 	border-radius: 3px;
+
+// `;
 const Icon = styled(FontAwesomeIcon)`
    font-weight: lighter;
    height: 12px;
    margin-right: 5px;
+`;
+
+const CheckIcon = styled(FontAwesomeIcon)`
+   color: white;
+   height: 12px;
 `;
 const Wrapper = styled.div`
    display: flex;
@@ -138,6 +167,9 @@ const StyledCheckbox = styled.div`
    border: 1px dashed #3e2b4c;
    border-radius: 3px;
    margin: 0 10px 0 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 `;
 const ItemBold = styled.div`
    color: #66676c;
