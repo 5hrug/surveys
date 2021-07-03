@@ -23,3 +23,14 @@ a {
 * {
    box-sizing: border-box;
 }
+
+table, th, td {
+   /* border: 1px solid black; */
+}
+
+tr {
+   /* border: 1px solid rgb(173, 31, 31); */
+}
+table{
+   /* border-collapse: collapse; */
+}
