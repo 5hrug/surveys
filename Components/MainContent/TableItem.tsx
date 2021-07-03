@@ -42,7 +42,7 @@ export function TableItem(props: Props) {
    const colorId = String(props.id);
 
    useEffect(() => {
-      props.handleClickCheckbox && props.handleClickCheckbox(checked, props.id);
+      props.handleClickCheckbox(checked, props.id);
    }, [checked]);
 
    return (
@@ -62,12 +62,16 @@ export function TableItem(props: Props) {
                <Item>{props.folder}</Item>
                <Item>{handleUnix(props.created)}</Item>
                <Item>{handleUnix(props.validUntil)}</Item>
-               <CreatedByImage
-                  src={require('../../assets/' + props.image)}
-                  height={50}
-                  width={50}
-                  alt='Logo'
-               />
+               <ImageRingTeal>
+                  <ImageRingBlack>
+                     <CreatedByImage
+                        src={require('../../assets/' + props.image)}
+                        height={50}
+                        width={50}
+                        alt='Logo'
+                     />
+                  </ImageRingBlack>
+               </ImageRingTeal>
             </Container>
             <ThreeDots onClick={props.onClickDots} />
          </Row>
@@ -100,6 +104,23 @@ export function TableItem(props: Props) {
       </Wrapper>
    );
 }
+const ImageRingBlack = styled('div')`
+   height: 55px;
+   width: 55px;
+   background-color: black;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
+`;
+
+const ImageRingTeal = styled(ImageRingBlack)`
+   height: 60px;
+   width: 60px;
+   /* background-color: teal; */
+   background: linear-gradient(#0b8fcc, #0bcbe4);;
+
+`;
 
 const CreatedByImage = styled(Image)`
    border-radius: 50%;

@@ -3,9 +3,8 @@ import TableItem, { stateType, folderType } from './TableItem';
 import styled from 'styled-components';
 import TableHeader from './TableHeader';
 import apiData from '../../lib/surveys.json';
-import alzaLogo from '../../assets/u.png'
-import Image from 'next/image'
-
+import alzaLogo from '../../assets/u.png';
+import Image from 'next/image';
 
 type FieldSortType = string | number;
 
@@ -28,17 +27,17 @@ const allSortedAsc = () => {
 };
 
 function Table() {
+
    const [expanded, setExpanded] = useState<number>(-1);
    const surveysData = apiData.data;
    const [sortedSurveys, setSortedSurveys] = useState<any>();
    const [headerWhiteColor, setHeaderWhiteColor] = useState('');
-
+   const [allCheckboxes, setAllCheckboxes] = useState(false);
    const [isCheck, setIsCheck] = useState<number[]>([]);
 
    useEffect(() => {
       handleClickSort('answered');
    }, []);
-   useEffect(() => {}, [isCheck]);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -49,9 +48,8 @@ function Table() {
    const handleClickSort = (fieldToSort: FieldSortType) => {
       switch (fieldToSort) {
          case 'title':
-            if(headerWhiteColor==='title')setHeaderWhiteColor('descTitle');
+            if (headerWhiteColor === 'title') setHeaderWhiteColor('descTitle');
             else setHeaderWhiteColor('title');
-
             if (sortTitle) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -73,8 +71,7 @@ function Table() {
             break;
 
          case 'state':
-            if(headerWhiteColor==='state')setHeaderWhiteColor('descState');
-
+            if (headerWhiteColor === 'state') setHeaderWhiteColor('descState');
             else setHeaderWhiteColor('state');
             if (sortState) {
                allSortedAsc();
@@ -97,8 +94,8 @@ function Table() {
             break;
 
          case 'viewed':
-            if(headerWhiteColor==='viewed')setHeaderWhiteColor('descViewed');
-
+            if (headerWhiteColor === 'viewed')
+               setHeaderWhiteColor('descViewed');
             else setHeaderWhiteColor('viewed');
             if (sortViewed) {
                allSortedAsc();
@@ -121,8 +118,8 @@ function Table() {
             break;
 
          case 'answered':
-            if(headerWhiteColor==='answered')setHeaderWhiteColor('descAnswered');
-
+            if (headerWhiteColor === 'answered')
+               setHeaderWhiteColor('descAnswered');
             else setHeaderWhiteColor('answered');
             if (sortAnswered) {
                allSortedAsc();
@@ -145,8 +142,8 @@ function Table() {
             break;
 
          case 'folder':
-            if(headerWhiteColor==='folder')setHeaderWhiteColor('descFolder');
-
+            if (headerWhiteColor === 'folder')
+               setHeaderWhiteColor('descFolder');
             else setHeaderWhiteColor('folder');
             if (sortFolder) {
                allSortedAsc();
@@ -169,8 +166,8 @@ function Table() {
             break;
 
          case 'created':
-            if(headerWhiteColor==='created')setHeaderWhiteColor('descCreated');
-
+            if (headerWhiteColor === 'created')
+               setHeaderWhiteColor('descCreated');
             else setHeaderWhiteColor('created');
             if (sortCreated) {
                allSortedAsc();
@@ -193,8 +190,8 @@ function Table() {
             break;
 
          case 'validUntil':
-            if(headerWhiteColor==='validUntil')setHeaderWhiteColor('descValidUntil');
-
+            if (headerWhiteColor === 'validUntil')
+               setHeaderWhiteColor('descValidUntil');
             else setHeaderWhiteColor('validUntil');
             if (sortValidUntil) {
                allSortedAsc();
@@ -219,20 +216,19 @@ function Table() {
    };
 
    const handleClickCheckbox = (checked: boolean, id: number) => {
-      setIsCheck([...isCheck, id]);
       if (!checked) {
          setIsCheck(isCheck.filter((item) => item !== id));
-      }
+      } else setIsCheck([...isCheck, id]);
    };
-   const [allCheckboxes, setAllCheckboxes] = useState(false);
 
    const handleClickAllCheckboxes = () => {
-      setAllCheckboxes(!allCheckboxes);
-      const newData = surveysData.slice();
-      setIsCheck(newData.map((li) => li.id));
       if (allCheckboxes) {
          setIsCheck([]);
+      } else {
+         const newData = surveysData.slice();
+         setIsCheck(newData.map((item) => item.id));
       }
+      setAllCheckboxes(!allCheckboxes);
    };
    return (
       <Container>

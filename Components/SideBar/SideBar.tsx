@@ -1,17 +1,21 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
 import Item from './Item'
 
 function SideBar() {
+  const [selected, setSelected] = useState('Surveys');
+  const handleClickSelected = (name:string) => {
+    setSelected(name);
+  }
   return (
     <Container>
-      <Item text='Dashboard' />
-      <Item text='Campains'/>
-      <Item text='Workflows'/>
-      <Item text='Templates'/>
-      <Item text='Stats'/>
-      <Item text='Contacts'/>
-      <Item text='Surveys'/>
+      <Item text='Dashboard' selected={selected} onClick={handleClickSelected} />
+      <Item text='Campains' selected={selected} onClick={handleClickSelected}/>
+      <Item text='Workflows' selected={selected} onClick={handleClickSelected}/>
+      <Item text='Templates' selected={selected} onClick={handleClickSelected}/>
+      <Item text='Stats' selected={selected} onClick={handleClickSelected}/>
+      <Item text='Contacts' selected={selected} onClick={handleClickSelected}/>
+      <Item text='Surveys' selected={selected} onClick={handleClickSelected}/>
     </Container>
   )
 }
