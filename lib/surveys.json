@@ -8,7 +8,9 @@
       "answered": 95,
       "folder": "Pravidelne",
       "created": 1478884038,
-      "validUntil": 1593187638
+      "validUntil": 1593187638,
+      "image": "abc.jpg"
+
     },
     {
       "id": 2,
@@ -18,7 +20,9 @@
       "answered": 194,
       "folder": "Unikátní",
       "created": 1556294838,
-      "validUntil": 1505837238
+      "validUntil": 1505837238,
+      "image": "random1.jpg"
+
     },
     {
       "id": 3,
@@ -28,7 +32,9 @@
       "answered": 5,
       "folder": "Pravidelne",
       "created": 1492963638,
-      "validUntil": 1524499638
+      "validUntil": 1524499638,
+      "image": "random2.jpg"
+
     },
     {
       "id": 4,
@@ -38,7 +44,9 @@
       "answered": 1,
       "folder": "Pravidelne",
       "created": 1478884038,
-      "validUntil": 1587917238
+      "validUntil": 1587917238,
+      "image": "abc.jpg"
+
     },
     {
       "id": 5,
@@ -48,7 +56,8 @@
       "answered": 158,
       "folder": "Unikátní",
       "created": 1561910838,
-      "validUntil": 1505837238
+      "validUntil": 1505837238,
+      "image": "u.jpg"
     }
   ]
 }

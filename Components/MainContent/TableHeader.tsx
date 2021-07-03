@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faAngleDown,faAngleUp } from '@fortawesome/free-solid-svg-icons';
 interface Props {
    sortOnClick: (name: string) => void;
-   whiteColor: string;
+   beingSorted: string;
    allCheckboxes?: boolean;
    handleClickAllCheckboxes?: () => void;
 }
 function TableHeader({
    sortOnClick,
-   whiteColor,
+   beingSorted,
    allCheckboxes,
    handleClickAllCheckboxes,
 }: Props) {
@@ -19,63 +19,74 @@ function TableHeader({
          <StyledCheckbox onClick={handleClickAllCheckboxes}>
             {allCheckboxes && <CheckIcon icon={faCheck} />}
          </StyledCheckbox>
-
          <Container>
             <Item
                onClick={() => {
                   sortOnClick('title');
                }}
-               color={whiteColor == 'title' ? whiteColor : ''}>
+               color={(beingSorted === 'title' ||  beingSorted === 'descTitle') ? beingSorted : ''}>
                Title
-               {whiteColor == 'title' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'title' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descTitle' && <Icon icon={faAngleUp} />}
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('state');
                }}
-               color={whiteColor == 'state' ? whiteColor : ''}>
+               color={beingSorted === 'state' || beingSorted === 'descState' ? beingSorted : ''}>
                State
-               {whiteColor == 'state' && <Icon icon={faAngleDown} />}
+               {beingSorted ==='state' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descState' && <Icon icon={faAngleUp} />}
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('viewed');
                }}
-               color={whiteColor == 'viewed' ? whiteColor : ''}>
+               color={beingSorted === 'viewed' || beingSorted === 'descViewed' ? beingSorted : ''}>
                Viewed
-               {whiteColor == 'viewed' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'viewed' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descViewed' && <Icon icon={faAngleUp} />}
+
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('answered');
                }}
-               color={whiteColor == 'answered' ? whiteColor : ''}>
+               color={beingSorted === 'answered' || beingSorted === 'descAnswered' ? beingSorted : ''}>
                Answered
-               {whiteColor == 'answered' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'answered' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descAnswered' && <Icon icon={faAngleUp} />}
+
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('folder');
                }}
-               color={whiteColor == 'folder' ? whiteColor : ''}>
+               color={beingSorted === 'folder' || beingSorted === 'descFolder' ? beingSorted : ''}>
                Folder
-               {whiteColor == 'folder' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'folder' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descFolder' && <Icon icon={faAngleUp} />}
+
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('created');
                }}
-               color={whiteColor == 'created' ? whiteColor : ''}>
+               color={beingSorted === 'created' || beingSorted === 'descCreated'  ? beingSorted : ''}>
                Created
-               {whiteColor == 'created' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'created' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descCreated' && <Icon icon={faAngleUp} />}
+
             </Item>
             <Item
                onClick={() => {
                   sortOnClick('validUntil');
                }}
-               color={whiteColor == 'validUntil' ? whiteColor : ''}>
+               color={beingSorted === 'validUntil' || beingSorted === 'descValidUntil'  ? beingSorted : ''}>
                Valid until
-               {whiteColor == 'validUntil' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'validUntil' && <Icon icon={faAngleDown} />}
+               {beingSorted === 'descValidUntil' && <Icon icon={faAngleUp} />}
+
             </Item>
             <Item onClick={() => {}}>Created by</Item>
          </Container>

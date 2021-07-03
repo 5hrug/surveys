@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ThreeDots from './ThreeDots';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import Image from 'next/image';
 import {
    faTrashAlt,
    faEye,
@@ -19,16 +20,16 @@ interface Props {
    id: number;
    title: string;
    state: stateType;
-   viewed?: number;
-   answered?: number;
-   folder?: folderType;
+   viewed: number;
+   answered: number;
+   folder: folderType;
    created: number;
    validUntil: number;
-   styledImage?: any;
-   onClickDots?: () => void;
+   onClickDots: () => void;
    expanded: number;
-   handleClickCheckbox?: (checked: boolean, id: number) => void;
-   isChecked?: boolean;
+   handleClickCheckbox: (checked: boolean, id: number) => void;
+   isChecked: boolean;
+   image: string;
 }
 export function TableItem(props: Props) {
    const [checked, setChecked] = useState(false);
@@ -42,7 +43,8 @@ export function TableItem(props: Props) {
 
    useEffect(() => {
       props.handleClickCheckbox && props.handleClickCheckbox(checked, props.id);
-   }, [checked])
+   }, [checked]);
+
    return (
       <Wrapper>
          <Row>
@@ -60,7 +62,12 @@ export function TableItem(props: Props) {
                <Item>{props.folder}</Item>
                <Item>{handleUnix(props.created)}</Item>
                <Item>{handleUnix(props.validUntil)}</Item>
-               <StyledImage>{props.styledImage}</StyledImage>
+               <CreatedByImage
+                  src={require('../../assets/' + props.image)}
+                  height={50}
+                  width={50}
+                  alt='Logo'
+               />
             </Container>
             <ThreeDots onClick={props.onClickDots} />
          </Row>
@@ -94,22 +101,15 @@ export function TableItem(props: Props) {
    );
 }
 
-// const SkuskaInput = styled('input')`
-// -webkit-appearance: none;
-// 	background-color: #b33434;
-// 	/* background-color: inherit; */
-// 	/* border: 1px solid #cacece; */
-// 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-// 	padding: 10px;
-// 	border-radius: 3px;
-
-// `;
+const CreatedByImage = styled(Image)`
+   border-radius: 50%;
+   object-fit: cover;
+`;
 const Icon = styled(FontAwesomeIcon)`
    font-weight: lighter;
    height: 12px;
    margin-right: 5px;
 `;
-
 const CheckIcon = styled(FontAwesomeIcon)`
    color: white;
    height: 12px;
@@ -121,7 +121,6 @@ const Wrapper = styled.div`
    align-items: center;
    margin: 10px 0;
 `;
-
 const ExpandedContainer = styled.div`
    display: flex;
    flex-direction: row;
@@ -132,7 +131,6 @@ const ExpandedContainer = styled.div`
    width: 950px;
    border-radius: 5px;
 `;
-
 const ExpandedItem = styled.div`
    display: flex;
    flex-direction: row;

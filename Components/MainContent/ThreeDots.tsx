@@ -5,13 +5,13 @@ interface Props {
    onClick?: () => void;
 }
 
-function ThreeDots({onClick}:Props) {
+function ThreeDots({ onClick }: Props) {
    return (
-      <Wrapper onClick={onClick} >
-         <Dot />
-         <Dot />
-         <Dot />
-      </Wrapper>
+         <Wrapper onClick={onClick}>
+            <Dot />
+            <Dot />
+            <Dot />
+         </Wrapper>
    );
 }
 
@@ -22,7 +22,6 @@ const Wrapper = styled.a`
    align-items: center;
    cursor: pointer;
    padding: 10px;
-
 `;
 
 const Dot = styled.div`
