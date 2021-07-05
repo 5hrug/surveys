@@ -3,8 +3,6 @@ import TableItem, { stateType, folderType } from './TableItem';
 import styled from 'styled-components';
 import TableHeader from './TableHeader';
 import apiData from '../../lib/surveys.json';
-import alzaLogo from '../../assets/u.png';
-import Image from 'next/image';
 
 type FieldSortType = string | number;
 
@@ -27,7 +25,6 @@ const allSortedAsc = () => {
 };
 
 function Table() {
-
    const [expanded, setExpanded] = useState<number>(-1);
    const surveysData = apiData.data;
    const [sortedSurveys, setSortedSurveys] = useState<any>();
@@ -233,7 +230,8 @@ function Table() {
    return (
       <Container>
          <Header>
-            <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
+            <Titel>Surveys</Titel>
+            <StyledButton>New Survey</StyledButton>
          </Header>
          <TableHeader
             sortOnClick={handleClickSort}
@@ -268,7 +266,6 @@ function Table() {
       </Container>
    );
 }
-
 const Container = styled.div`
    background-color: #222533;
    padding: 20px 40px;
@@ -277,17 +274,16 @@ const Container = styled.div`
 `;
 const Header = styled.div`
    display: flex;
-   justify-content: space-between;
    margin: 0 0 20px;
    padding: 10px 0 30px 10px;
    border-bottom: 1px solid #3e2b4c;
    width: 1030px;
+   justify-content: space-between;
 `;
 const Titel = styled.div`
    font-size: large;
    color: #fff;
 `;
-
 const StyledButton = styled.a`
    font-size: medium;
    color: #fff;

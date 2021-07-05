@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 interface Props {
    onClick?: () => void;
 }
@@ -14,7 +13,6 @@ function ThreeDots({ onClick }: Props) {
          </Wrapper>
    );
 }
-
 const Wrapper = styled.a`
    display: flex;
    flex-direction: column;
@@ -23,7 +21,6 @@ const Wrapper = styled.a`
    cursor: pointer;
    padding: 10px;
 `;
-
 const Dot = styled.div`
    width: 4px;
    height: 4px;

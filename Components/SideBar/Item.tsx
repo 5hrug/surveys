@@ -42,6 +42,7 @@ const Container = styled.tr`
    color: #727278;
    padding: 12px 0;
    height: 50px;
+   cursor: pointer;
 `;
 const Title = styled.a`
    font-size: 14px;

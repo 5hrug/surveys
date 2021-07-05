@@ -55,23 +55,25 @@ export function TableItem(props: Props) {
                {props.isChecked && <CheckIcon icon={faCheck} />}
             </StyledCheckbox>
             <Container id={ex} color={colorId}>
-               <Item>{props.title}</Item>
+               <Title>{props.title}</Title>
                <Item>{props.state}</Item>
                <ItemBold>{props.viewed}</ItemBold>
                <ItemBold>{props.answered}</ItemBold>
                <Item>{props.folder}</Item>
                <Item>{handleUnix(props.created)}</Item>
                <Item>{handleUnix(props.validUntil)}</Item>
-               <ImageRingTeal>
-                  <ImageRingBlack>
-                     <CreatedByImage
-                        src={require('../../assets/' + props.image)}
-                        height={50}
-                        width={50}
-                        alt='Logo'
-                     />
-                  </ImageRingBlack>
-               </ImageRingTeal>
+               <ImgWrapper>
+                  <ImageRingTeal>
+                     <ImageRingBlack>
+                        <CreatedByImage
+                           src={require('../../assets/' + props.image)}
+                           height={50}
+                           width={50}
+                           alt='Logo'
+                        />
+                     </ImageRingBlack>
+                  </ImageRingTeal>
+               </ImgWrapper>
             </Container>
             <ThreeDots onClick={props.onClickDots} />
          </Row>
@@ -117,9 +119,7 @@ const ImageRingBlack = styled('div')`
 const ImageRingTeal = styled(ImageRingBlack)`
    height: 60px;
    width: 60px;
-   /* background-color: teal; */
-   background: linear-gradient(#0b8fcc, #0bcbe4);;
-
+   background: linear-gradient(#0b8fcc, #0bcbe4); ;
 `;
 
 const CreatedByImage = styled(Image)`
@@ -149,7 +149,7 @@ const ExpandedContainer = styled.div`
    background-color: #171820;
    height: 50px;
    align-items: center;
-   width: 950px;
+   width: 900px;
    border-radius: 5px;
 `;
 const ExpandedItem = styled.div`
@@ -172,13 +172,14 @@ const Container = styled.div`
       props.color == props.id ? '#282b3b' : '#222533'};
    height: 3em;
    align-items: center;
-   justify-content: space-evenly;
-   width: 1000px;
+   /* justify-content: space-evenly; */
+   /* width: 1000px; */
    ${(props) => (props.color == props.id ? '' : 'border: 1px dashed #3e2b4c;')}
    height: 70px;
    border-radius: 5px;
    box-shadow: ${(props) =>
       props.color == props.id ? '0 0 5px 5px rgb(32,32,50,1)' : ''};
+   padding-left: 20px;
 `;
 const StyledCheckbox = styled.div`
    width: 20px;
@@ -194,10 +195,19 @@ const ItemBold = styled.div`
    color: #66676c;
    font-weight: bold;
    font-size: 13px;
+   width: 110px;
 `;
 const Item = styled.div`
    color: #c2c2c2;
    font-size: 13px;
+   width: 110px;
+`;
+
+export const Title = styled(Item)`
+   width: 200px;
+`;
+export const ImgWrapper = styled(Item)`
+   width: 80px;
 `;
 const StyledImage = styled.div``;
 

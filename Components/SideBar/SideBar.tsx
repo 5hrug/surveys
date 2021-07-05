@@ -67,20 +67,12 @@ function SideBar() {
    );
 }
 const Container = styled.div`
-   /* width: 13%; */
-   /* width: 100%; */
    width: 200px;
    background-color: #1a1b25;
    height: 100%;
 `;
 const Table_ = styled.table`
-  /* table-layout: fixed; */
-
-   /* width: 13%; */
-   /* width: 100%; */
    width: 200px;
    background-color: #1a1b25;
-   /* height: 100%; */
-   /* height: 300px; */
 `;
 export default SideBar;

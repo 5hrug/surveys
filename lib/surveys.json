@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "title": "a",
+      "title": "Účasť na akci",
       "state": "Zpracovaná",
       "viewed": 4,
       "answered": 95,
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "title": "v",
+      "title": "Feedback akce",
       "state": "Odesíla se",
       "viewed": 24,
       "answered": 194,
@@ -26,7 +26,7 @@
     },
     {
       "id": 3,
-      "title": "b",
+      "title": "Preference produktu",
       "state": "Zpracovaná",
       "viewed": 30,
       "answered": 5,
@@ -38,7 +38,7 @@
     },
     {
       "id": 4,
-      "title": "p",
+      "title": "Zájmy",
       "state": "Odesíla se",
       "viewed": 20,
       "answered": 1,
@@ -50,13 +50,24 @@
     },
     {
       "id": 5,
-      "title": "h",
+      "title": "Obecné o užívateli",
       "state": "Odesíla se",
       "viewed": 235,
       "answered": 158,
       "folder": "Unikátní",
       "created": 1561910838,
       "validUntil": 1505837238,
+      "image": "u.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Uvítání",
+      "state": "Zpracovaná",
+      "viewed": 2305,
+      "answered": 918,
+      "folder": "Pravidelne",
+      "created": 	1399093149,
+      "validUntil": 1457503149,
       "image": "u.jpg"
     }
   ]
