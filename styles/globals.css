@@ -6,13 +6,13 @@ body {
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-/* html,
-      body, */
-      /* body > div:first-child,
-      div#__next, */
+html,
+      body,
+      body > div:first-child,
+      div#__next,
       div#__next > div 
       {
-        height: 100vh;
+        height: 100%;
       }
 
 a {
@@ -22,4 +22,15 @@ a {
 
 * {
    box-sizing: border-box;
+}
+
+table, th, td {
+   /* border: 1px solid black; */
+}
+
+tr {
+   /* border: 1px solid rgb(173, 31, 31); */
+}
+table{
+   /* border-collapse: collapse; */
 }

@@ -29,15 +29,12 @@ function Table() {
    const surveysData = apiData.data;
    const [sortedSurveys, setSortedSurveys] = useState<any>();
    const [headerWhiteColor, setHeaderWhiteColor] = useState('');
-
+   const [allCheckboxes, setAllCheckboxes] = useState(false);
    const [isCheck, setIsCheck] = useState<number[]>([]);
 
    useEffect(() => {
       handleClickSort('answered');
    }, []);
-   useEffect(() => {
-      console.log(isCheck);
-   }, [isCheck]);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -48,9 +45,9 @@ function Table() {
    const handleClickSort = (fieldToSort: FieldSortType) => {
       switch (fieldToSort) {
          case 'title':
-            setHeaderWhiteColor('title');
+            if (headerWhiteColor === 'title') setHeaderWhiteColor('descTitle');
+            else setHeaderWhiteColor('title');
             if (sortTitle) {
-               console.log('if');
                allSortedAsc();
                const newSurveys = surveysData.slice();
                setSortedSurveys(
@@ -59,7 +56,6 @@ function Table() {
                   })
                );
             } else {
-               console.log('elseif');
                allSortedAsc();
                sortTitle = true;
                const newSurveys = surveysData.slice();
@@ -72,7 +68,8 @@ function Table() {
             break;
 
          case 'state':
-            setHeaderWhiteColor('state');
+            if (headerWhiteColor === 'state') setHeaderWhiteColor('descState');
+            else setHeaderWhiteColor('state');
             if (sortState) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -94,7 +91,9 @@ function Table() {
             break;
 
          case 'viewed':
-            setHeaderWhiteColor('viewed');
+            if (headerWhiteColor === 'viewed')
+               setHeaderWhiteColor('descViewed');
+            else setHeaderWhiteColor('viewed');
             if (sortViewed) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -116,11 +115,11 @@ function Table() {
             break;
 
          case 'answered':
-            setHeaderWhiteColor('answered');
-            console.log('answered');
+            if (headerWhiteColor === 'answered')
+               setHeaderWhiteColor('descAnswered');
+            else setHeaderWhiteColor('answered');
             if (sortAnswered) {
                allSortedAsc();
-               console.log('if answered');
                const newSurveys = surveysData.slice();
                setSortedSurveys(
                   newSurveys.sort((a, b) => {
@@ -129,8 +128,6 @@ function Table() {
                );
             } else {
                allSortedAsc();
-               console.log('else answered');
-               console.log('surveysData.slice() answered', surveysData.slice());
                sortAnswered = true;
                const newSurveys = surveysData.slice();
                setSortedSurveys(
@@ -142,7 +139,9 @@ function Table() {
             break;
 
          case 'folder':
-            setHeaderWhiteColor('folder');
+            if (headerWhiteColor === 'folder')
+               setHeaderWhiteColor('descFolder');
+            else setHeaderWhiteColor('folder');
             if (sortFolder) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -164,7 +163,9 @@ function Table() {
             break;
 
          case 'created':
-            setHeaderWhiteColor('created');
+            if (headerWhiteColor === 'created')
+               setHeaderWhiteColor('descCreated');
+            else setHeaderWhiteColor('created');
             if (sortCreated) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -186,7 +187,9 @@ function Table() {
             break;
 
          case 'validUntil':
-            setHeaderWhiteColor('validUntil');
+            if (headerWhiteColor === 'validUntil')
+               setHeaderWhiteColor('descValidUntil');
+            else setHeaderWhiteColor('validUntil');
             if (sortValidUntil) {
                allSortedAsc();
                const newSurveys = surveysData.slice();
@@ -206,46 +209,37 @@ function Table() {
                );
             }
          default:
-            console.log('default');
       }
    };
 
    const handleClickCheckbox = (checked: boolean, id: number) => {
-      console.log(checked, id);
-      setIsCheck([...isCheck, id]);
       if (!checked) {
          setIsCheck(isCheck.filter((item) => item !== id));
-      }
+      } else setIsCheck([...isCheck, id]);
    };
-   const [allCheckboxes, setAllCheckboxes] = useState(false);
 
    const handleClickAllCheckboxes = () => {
-      console.log('smetu')
-      setAllCheckboxes(!allCheckboxes);
-      const newData = surveysData.slice();
-      setIsCheck(newData.map(li => li.id));
       if (allCheckboxes) {
-        setIsCheck([]);
+         setIsCheck([]);
+      } else {
+         const newData = surveysData.slice();
+         setIsCheck(newData.map((item) => item.id));
       }
-      // console.log(checked, id);
-      // setIsCheck([...isCheck, id]);
-      // if (!checked) {
-      //    setIsCheck(isCheck.filter((item) => item !== id));
-      // }
+      setAllCheckboxes(!allCheckboxes);
    };
-
-
    return (
       <Container>
          <Header>
-            <Titel>Surveys</Titel> <StyledButton>New Survey</StyledButton>
+            <Titel>Surveys</Titel>
+            <StyledButton>New Survey</StyledButton>
          </Header>
          <TableHeader
             sortOnClick={handleClickSort}
-            whiteColor={headerWhiteColor}
+            beingSorted={headerWhiteColor}
             allCheckboxes={allCheckboxes}
             handleClickAllCheckboxes={handleClickAllCheckboxes}
          />
+
          {sortedSurveys &&
             sortedSurveys.map((objInArray: any) => {
                return (
@@ -265,99 +259,31 @@ function Table() {
                         handleThreeDots(objInArray.id);
                      }}
                      expanded={expanded}
+                     image={objInArray.image}
                   />
                );
             })}
-
-         {/* <TableItem
-            title='nazov'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-            onClickDots={() => {
-               handleThreeDots('nazov');
-            }}
-            expanded={expanded}
-         />
-         <TableItem
-            title='nazov2'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-            onClickDots={() => {
-               handleThreeDots('nazov2');
-            }}
-            expanded={expanded}
-         />
-         <TableItem
-            title='nazov3'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-            onClickDots={() => {
-               handleThreeDots('nazov3');
-            }}
-            expanded={expanded}
-         />
-         <TableItem
-            title='nazov4'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-            onClickDots={() => {
-               handleThreeDots('nazov4');
-            }}
-            expanded={expanded}
-         />
-         <TableItem
-            title='nazov5'
-            state='Odesíla se'
-            viewed={230}
-            answered={154}
-            folder='Pravidelne'
-            created={date}
-            validUntil={date}
-            onClickDots={() => {
-               handleThreeDots('nazov5');
-            }}
-            expanded={expanded}
-         /> */}
       </Container>
    );
 }
-
 const Container = styled.div`
    background-color: #222533;
    padding: 20px 40px;
    width: 100%;
    height: 100%;
 `;
-
 const Header = styled.div`
    display: flex;
-   justify-content: space-between;
    margin: 0 0 20px;
    padding: 10px 0 30px 10px;
    border-bottom: 1px solid #3e2b4c;
    width: 1030px;
+   justify-content: space-between;
 `;
 const Titel = styled.div`
    font-size: large;
    color: #fff;
 `;
-
 const StyledButton = styled.a`
    font-size: medium;
    color: #fff;

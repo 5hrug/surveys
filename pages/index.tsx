@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Table from '../Components/MainContent/Table';
-import Header from '../Components/Header/Header';
+import SurveysHeader from '../Components/SurveysHeader/SurveysHeader';
 import SideBar from '../Components/SideBar/SideBar';
 import styled from 'styled-components';
 
@@ -14,8 +14,7 @@ export default function Home() {
          </Head>
 
          <MainContainer>
-            {/* <TempBox>asdasd</TempBox> */}
-            <Header />
+            <SurveysHeader />
             <ContainerTableSideBar>
                <SideBar />
                <Table />
@@ -31,14 +30,7 @@ const AppWrapper = styled.div`
 const MainContainer = styled.main`
    width: 100%;
    height: 100%;
-   /* border: solid 5px #b38f8f;
-   background-color: '#c02b2b'; */
-`;
-const TempBox = styled.div`
-   width: 1000px;
-   height: 1000px;
-   border: solid 5px #3f3e3e;
-   background-color: '#c02b2b';
+
 `;
 
 const ContainerTableSideBar = styled.div`
