@@ -25,6 +25,16 @@ function SideBar() {
                   selected={selected}
                   onClick={handleClickSelected}
                />
+<tr>
+
+         <td>
+            <div>sds asd dasd</div>
+         </td>
+                  <td>
+            <div>asd</div>
+         </td>
+</tr>
+
                <Item
                   text='Campains'
                   icon={faEye}
