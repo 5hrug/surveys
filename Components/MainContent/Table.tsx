@@ -33,10 +33,10 @@ function Table() {
    const [isCheck, setIsCheck] = useState<number[]>([]);
 
    const [last, setLast] = useState<string>();
-   // let last: String;
    useEffect(() => {
-      handleClickSort('answered');
-   }, []);
+      // handleClickSort('answered');
+      console.log(sortedSurveys);
+   }, [sortedSurveys]);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -44,35 +44,11 @@ function Table() {
       else setExpanded(id);
    };
 
-   let me = [
-      // 54,1,3
-      // "zu",'as'
-
-      {
-         ggg: 'gdc',
-         asd: 11241,
-         dafuk2: 2772,
-      },
-      {
-         ggg: 'sg',
-         asd: 1161,
-         dafuk2: 2521,
-      },
-      {
-         ggg: 'bgdf',
-         asd: 111,
-         dafuk2: 224444,
-      },
-   ];
-
-   let key = 'asd';
-   // console.log(me.sort((a,b)=> a.ggg > b.ggg ? 1 : -1));
-   me[key as keyof typeof me];
    const handleClickSort = (fieldToSort: string) => {
-      console.log('last out', last);
-      console.log('fieldToSort', fieldToSort);
-      console.log('fieldToSort', last == fieldToSort);
       const newSurveys = surveysData.slice();
+      if (headerWhiteColor === fieldToSort)
+         setHeaderWhiteColor('desc' + fieldToSort);
+      else setHeaderWhiteColor(fieldToSort);
       if (last != fieldToSort) {
          setSortedSurveys(
             newSurveys.sort((a, b) =>
@@ -83,7 +59,6 @@ function Table() {
             )
          );
          setLast(fieldToSort);
-         // last = fieldToSort;
          console.log('first', last);
       } else {
          setSortedSurveys(
@@ -94,179 +69,10 @@ function Table() {
                   : -1
             )
          );
-         setLast('');
-         // last = '';
-         console.log('second', last);
+         setLast('33');
+         console.log('secont', last);
       }
    };
-
-   // switch (fieldToSort) {
-   //    case 'title':
-   //       if (headerWhiteColor === 'title') setHeaderWhiteColor('descTitle');
-   //       else setHeaderWhiteColor('title');
-   //       if (sortTitle) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + b.title).localeCompare(a.title);
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortTitle = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + a.title).localeCompare(b.title);
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'state':
-   //       if (headerWhiteColor === 'state') setHeaderWhiteColor('descState');
-   //       else setHeaderWhiteColor('state');
-   //       if (sortState) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + b.state).localeCompare(a.state);
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortState = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + a.state).localeCompare(b.state);
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'viewed':
-   //       if (headerWhiteColor === 'viewed')
-   //          setHeaderWhiteColor('descViewed');
-   //       else setHeaderWhiteColor('viewed');
-   //       if (sortViewed) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return b.viewed - a.viewed;
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortViewed = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return a.viewed - b.viewed;
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'answered':
-   //       if (headerWhiteColor === 'answered')
-   //          setHeaderWhiteColor('descAnswered');
-   //       else setHeaderWhiteColor('answered');
-   //       if (sortAnswered) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return b.answered - a.answered;
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortAnswered = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return a.answered - b.answered;
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'folder':
-   //       if (headerWhiteColor === 'folder')
-   //          setHeaderWhiteColor('descFolder');
-   //       else setHeaderWhiteColor('folder');
-   //       if (sortFolder) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + b.folder).localeCompare(a.folder);
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortFolder = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return ('' + a.folder).localeCompare(b.folder);
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'created':
-   //       if (headerWhiteColor === 'created')
-   //          setHeaderWhiteColor('descCreated');
-   //       else setHeaderWhiteColor('created');
-   //       if (sortCreated) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return b.created - a.created;
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortCreated = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return a.created - b.created;
-   //             })
-   //          );
-   //       }
-   //       break;
-
-   //    case 'validUntil':
-   //       if (headerWhiteColor === 'validUntil')
-   //          setHeaderWhiteColor('descValidUntil');
-   //       else setHeaderWhiteColor('validUntil');
-   //       if (sortValidUntil) {
-   //          allSortedAsc();
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return b.validUntil - a.validUntil;
-   //             })
-   //          );
-   //       } else {
-   //          allSortedAsc();
-   //          sortValidUntil = true;
-   //          const newSurveys = surveysData.slice();
-   //          setSortedSurveys(
-   //             newSurveys.sort((a, b) => {
-   //                return a.validUntil - b.validUntil;
-   //             })
-   //          );
-   //       }
-   //    default:
-   // }
 
    const handleClickCheckbox = (checked: boolean, id: number) => {
       if (!checked) {
@@ -294,6 +100,15 @@ function Table() {
             beingSorted={headerWhiteColor}
             allCheckboxes={allCheckboxes}
             handleClickAllCheckboxes={handleClickAllCheckboxes}
+            headerItems={[
+               'Title',
+               'State',
+               'Viewed',
+               'Answered',
+               'Folder',
+               'Created',
+               'ValidUntil',
+            ]}
          />
 
          {sortedSurveys &&

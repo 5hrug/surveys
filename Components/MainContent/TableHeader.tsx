@@ -11,12 +11,14 @@ interface Props {
    beingSorted: string;
    allCheckboxes?: boolean;
    handleClickAllCheckboxes?: () => void;
+   headerItems: string[];
 }
 function TableHeader({
    sortOnClick,
    beingSorted,
    allCheckboxes,
    handleClickAllCheckboxes,
+   headerItems,
 }: Props) {
    return (
       <Wrapper>
@@ -24,98 +26,22 @@ function TableHeader({
             {allCheckboxes && <CheckIcon icon={faCheck} />}
          </StyledCheckbox>
          <Container>
-            <Title
-               onClick={() => {
-                  sortOnClick('title');
-               }}
-               color={
-                  beingSorted === 'title' || beingSorted === 'descTitle'
-                     ? beingSorted
-                     : ''
-               }>
-               Title
-               {beingSorted === 'title' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descTitle' && <Icon icon={faAngleUp} />}
-            </Title>
-            <Item
-               onClick={() => {
-                  sortOnClick('state');
-               }}
-               color={
-                  beingSorted === 'state' || beingSorted === 'descState'
-                     ? beingSorted
-                     : ''
-               }>
-               State
-               {beingSorted === 'state' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descState' && <Icon icon={faAngleUp} />}
-            </Item>
-            <Item
-               onClick={() => {
-                  sortOnClick('viewed');
-               }}
-               color={
-                  beingSorted === 'viewed' || beingSorted === 'descViewed'
-                     ? beingSorted
-                     : ''
-               }>
-               Viewed
-               {beingSorted === 'viewed' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descViewed' && <Icon icon={faAngleUp} />}
-            </Item>
-            <Item
-               onClick={() => {
-                  sortOnClick('answered');
-               }}
-               color={
-                  beingSorted === 'answered' || beingSorted === 'descAnswered'
-                     ? beingSorted
-                     : ''
-               }>
-               Answered
-               {beingSorted === 'answered' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descAnswered' && <Icon icon={faAngleUp} />}
-            </Item>
-            <Item
-               onClick={() => {
-                  sortOnClick('folder');
-               }}
-               color={
-                  beingSorted === 'folder' || beingSorted === 'descFolder'
-                     ? beingSorted
-                     : ''
-               }>
-               Folder
-               {beingSorted === 'folder' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descFolder' && <Icon icon={faAngleUp} />}
-            </Item>
-            <Item
-               onClick={() => {
-                  sortOnClick('created');
-               }}
-               color={
-                  beingSorted === 'created' || beingSorted === 'descCreated'
-                     ? beingSorted
-                     : ''
-               }>
-               Created
-               {beingSorted === 'created' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descCreated' && <Icon icon={faAngleUp} />}
-            </Item>
-            <Item
-               onClick={() => {
-                  sortOnClick('validUntil');
-               }}
-               color={
-                  beingSorted === 'validUntil' ||
-                  beingSorted === 'descValidUntil'
-                     ? beingSorted
-                     : ''
-               }>
-               Valid until
-               {beingSorted === 'validUntil' && <Icon icon={faAngleDown} />}
-               {beingSorted === 'descValidUntil' && <Icon icon={faAngleUp} />}
-            </Item>
+            {headerItems.map((item, i) => (
+               <Item
+                  key={i}
+                  onClick={() => {
+                     sortOnClick(item);
+                  }}
+                  color={
+                     beingSorted === item || beingSorted === 'desc' + item
+                        ? beingSorted
+                        : ''
+                  }>
+                  {item}
+                  {beingSorted === item && <Icon icon={faAngleDown} />}
+                  {beingSorted === 'desc' + item && <Icon icon={faAngleUp} />}
+               </Item>
+            ))}
             <Item onClick={() => {}}>Created by</Item>
          </Container>
       </Wrapper>
