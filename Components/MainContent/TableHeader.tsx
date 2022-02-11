@@ -32,12 +32,14 @@ function TableHeader({
                   onClick={() => {
                      sortOnClick(item);
                   }}
-                  color={
-                     beingSorted === item || beingSorted === 'desc' + item
-                        ? beingSorted
-                        : ''
-                  }>
-                  {item}
+                  style={{
+                     width: i === 0 ? '200px' : '110px',
+                     color:
+                        beingSorted === item || beingSorted === 'desc' + item
+                           ? '#cfcfcf'
+                           : '#5f5f64',
+                  }}>
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
                   {beingSorted === item && <Icon icon={faAngleDown} />}
                   {beingSorted === 'desc' + item && <Icon icon={faAngleUp} />}
                </Item>
@@ -84,10 +86,8 @@ const Item = styled.div`
    display: flex;
    flex-direction: row;
    align-items: center;
-   color: ${({ color }) => (color ? '#cfcfcf' : '#5f5f64')};
    font-size: 13px;
    cursor: pointer;
-   width: 110px;
 
    -webkit-touch-callout: none;
    -webkit-user-select: none;

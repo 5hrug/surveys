@@ -35,8 +35,8 @@ function Table() {
    const [last, setLast] = useState<string>();
    useEffect(() => {
       // handleClickSort('answered');
-      console.log(sortedSurveys);
-   }, [sortedSurveys]);
+      handleClickSort('answered');
+   }, []);
 
    const handleThreeDots = (id: number) => {
       if (expanded === -1) setExpanded(id);
@@ -69,7 +69,7 @@ function Table() {
                   : -1
             )
          );
-         setLast('33');
+         setLast('');
          console.log('secont', last);
       }
    };
@@ -101,13 +101,13 @@ function Table() {
             allCheckboxes={allCheckboxes}
             handleClickAllCheckboxes={handleClickAllCheckboxes}
             headerItems={[
-               'Title',
-               'State',
-               'Viewed',
-               'Answered',
-               'Folder',
-               'Created',
-               'ValidUntil',
+               'title',
+               'state',
+               'viewed',
+               'answered',
+               'folder',
+               'created',
+               'validUntil',
             ]}
          />
 
