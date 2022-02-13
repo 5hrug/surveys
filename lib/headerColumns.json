@@ -1,0 +1,11 @@
+{
+   "headerColumns": [
+      "title",
+      "state",
+      "viewed",
+      "answered",
+      "folder",
+      "created",
+      "validUntil"
+   ]
+}

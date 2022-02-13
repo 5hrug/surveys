@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
    text: string;
+
    icon?: any;
    selected?: string;
    onClick?: (name: string) => void;

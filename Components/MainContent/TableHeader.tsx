@@ -9,9 +9,10 @@ import {
 interface Props {
    sortOnClick: (name: string) => void;
    beingSorted: string;
-   allCheckboxes?: boolean;
-   handleClickAllCheckboxes?: () => void;
    headerItems: string[];
+
+   handleClickAllCheckboxes?: () => void;
+   allCheckboxes?: boolean;
 }
 function TableHeader({
    sortOnClick,

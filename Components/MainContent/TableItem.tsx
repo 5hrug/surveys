@@ -25,11 +25,11 @@ interface Props {
    folder: folderType;
    created: number;
    validUntil: number;
-   onClickDots: () => void;
    expanded: number;
-   handleClickCheckbox: (checked: boolean, id: number) => void;
    isChecked: boolean;
    image: string;
+   onClickDots: () => void;
+   handleClickCheckbox: (checked: boolean, id: number) => void;
 }
 export function TableItem(props: Props) {
    const [checked, setChecked] = useState(false);

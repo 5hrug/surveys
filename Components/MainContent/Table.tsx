@@ -1,40 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import TableItem, { stateType, folderType } from './TableItem';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import surveysData from '../../lib/surveysData.json';
+import headerColumns from '../../lib/headerColumns.json';
+
 import TableHeader from './TableHeader';
-import apiData from '../../lib/surveys.json';
-
-type FieldSortType = string | number;
-
-let sortTitle = false,
-   sortState = false,
-   sortViewed = false,
-   sortAnswered = false,
-   sortFolder = false,
-   sortCreated = false,
-   sortValidUntil = false;
-
-const allSortedAsc = () => {
-   (sortTitle = false),
-      (sortState = false),
-      (sortViewed = false),
-      (sortAnswered = false),
-      (sortFolder = false),
-      (sortCreated = false),
-      (sortValidUntil = false);
-};
+import TableItem, { folderType, stateType } from './TableItem';
 
 function Table() {
    const [expanded, setExpanded] = useState<number>(-1);
-   const surveysData = apiData.data;
    const [sortedSurveys, setSortedSurveys] = useState<any>();
    const [headerWhiteColor, setHeaderWhiteColor] = useState('');
    const [allCheckboxes, setAllCheckboxes] = useState(false);
    const [isCheck, setIsCheck] = useState<number[]>([]);
-
    const [last, setLast] = useState<string>();
+
    useEffect(() => {
-      // handleClickSort('answered');
       handleClickSort('answered');
    }, []);
 
@@ -45,7 +25,7 @@ function Table() {
    };
 
    const handleClickSort = (fieldToSort: string) => {
-      const newSurveys = surveysData.slice();
+      const newSurveys = surveysData.surveysData.slice();
       if (headerWhiteColor === fieldToSort)
          setHeaderWhiteColor('desc' + fieldToSort);
       else setHeaderWhiteColor(fieldToSort);
@@ -59,7 +39,6 @@ function Table() {
             )
          );
          setLast(fieldToSort);
-         console.log('first', last);
       } else {
          setSortedSurveys(
             newSurveys.sort((a, b) =>
@@ -70,7 +49,6 @@ function Table() {
             )
          );
          setLast('');
-         console.log('secont', last);
       }
    };
 
@@ -84,7 +62,7 @@ function Table() {
       if (allCheckboxes) {
          setIsCheck([]);
       } else {
-         const newData = surveysData.slice();
+         const newData = surveysData.surveysData.slice();
          setIsCheck(newData.map((item) => item.id));
       }
       setAllCheckboxes(!allCheckboxes);
@@ -100,15 +78,7 @@ function Table() {
             beingSorted={headerWhiteColor}
             allCheckboxes={allCheckboxes}
             handleClickAllCheckboxes={handleClickAllCheckboxes}
-            headerItems={[
-               'title',
-               'state',
-               'viewed',
-               'answered',
-               'folder',
-               'created',
-               'validUntil',
-            ]}
+            headerItems={headerColumns.headerColumns}
          />
 
          {sortedSurveys &&
